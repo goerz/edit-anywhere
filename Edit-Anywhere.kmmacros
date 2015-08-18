@@ -6,7 +6,7 @@
 		<key>Activate</key>
 		<string>Normal</string>
 		<key>CreationDate</key>
-		<real>459387347.72605699</real>
+		<real>461618494.98372197</real>
 		<key>IsActive</key>
 		<true/>
 		<key>Macros</key>
@@ -18,7 +18,7 @@
 						<key>IsActive</key>
 						<true/>
 						<key>IsDisclosed</key>
-						<true/>
+						<false/>
 						<key>MacroActionType</key>
 						<string>Comment</string>
 						<key>Text</key>
@@ -35,18 +35,6 @@ Do not change the variable name (EDIT_ANYWHERE_FILE) just change the part in the
 						<string>Note: You can customize 'EDIT_ANYWHERE_FILE'</string>
 					</dict>
 					<dict>
-						<key>IsActive</key>
-						<true/>
-						<key>IsDisclosed</key>
-						<true/>
-						<key>MacroActionType</key>
-						<string>SetVariableToText</string>
-						<key>Text</key>
-						<string>edit_anywhere.txt</string>
-						<key>Variable</key>
-						<string>EDIT_ANYWHERE_FILE</string>
-					</dict>
-					<dict>
 						<key>ActionName</key>
 						<string>Store to the name of the active application to the variable ‘EditAnywhereApp’</string>
 						<key>IsActive</key>
@@ -61,48 +49,182 @@ Do not change the variable name (EDIT_ANYWHERE_FILE) just change the part in the
 						<string>EditAnywhereApp</string>
 					</dict>
 					<dict>
-						<key>ActionName</key>
-						<string>Type the ⌘A Keystroke (This should trigger 'Select All Text')</string>
+						<key>CaseEntries</key>
+						<array>
+							<dict>
+								<key>Actions</key>
+								<array>
+									<dict>
+										<key>IsActive</key>
+										<true/>
+										<key>IsDisclosed</key>
+										<false/>
+										<key>MacroActionType</key>
+										<string>SetVariableToText</string>
+										<key>Text</key>
+										<string>%SafariURL%</string>
+										<key>Variable</key>
+										<string>TAB_NAME</string>
+									</dict>
+								</array>
+								<key>ConditionType</key>
+								<string>Contains</string>
+								<key>TestValue</key>
+								<string>Safari</string>
+							</dict>
+							<dict>
+								<key>Actions</key>
+								<array>
+									<dict>
+										<key>IsActive</key>
+										<true/>
+										<key>IsDisclosed</key>
+										<false/>
+										<key>MacroActionType</key>
+										<string>SetVariableToText</string>
+										<key>Text</key>
+										<string>%ChromeURL%</string>
+										<key>Variable</key>
+										<string>TAB_NAME</string>
+									</dict>
+								</array>
+								<key>ConditionType</key>
+								<string>Contains</string>
+								<key>TestValue</key>
+								<string>Chrome</string>
+							</dict>
+						</array>
 						<key>IsActive</key>
 						<true/>
 						<key>IsDisclosed</key>
-						<false/>
-						<key>KeyCode</key>
-						<integer>0</integer>
+						<true/>
 						<key>MacroActionType</key>
-						<string>SimulateKeystroke</string>
-						<key>Modifiers</key>
-						<integer>256</integer>
-						<key>ReleaseAll</key>
-						<false/>
+						<string>Switch</string>
+						<key>Source</key>
+						<string>Variable</string>
+						<key>Variable</key>
+						<string>EditAnywhereApp</string>
 					</dict>
 					<dict>
 						<key>ActionName</key>
-						<string>Type the ⌘A Keystroke (This should trigger 'Select All Text')</string>
+						<string>Set EDIT_ANYWHERE_FILE based on running app or tab name</string>
+						<key>Conditions</key>
+						<dict>
+							<key>ConditionList</key>
+							<array>
+								<dict>
+									<key>ConditionType</key>
+									<string>Variable</string>
+									<key>Variable</key>
+									<string>TAB_NAME</string>
+									<key>VariableConditionType</key>
+									<string>Exists</string>
+									<key>VariableValue</key>
+									<string>value</string>
+								</dict>
+							</array>
+							<key>ConditionListMatch</key>
+							<string>All</string>
+						</dict>
+						<key>ElseActions</key>
+						<array>
+							<dict>
+								<key>IsActive</key>
+								<true/>
+								<key>IsDisclosed</key>
+								<false/>
+								<key>MacroActionType</key>
+								<string>SetVariableToText</string>
+								<key>Text</key>
+								<string>EA_%Variable%EditAnywhereApp%_%ICUDateTime%yyyy-mm-dd-hh-mm-ss%.txt</string>
+								<key>Variable</key>
+								<string>EDIT_ANYWHERE_FILE</string>
+							</dict>
+						</array>
 						<key>IsActive</key>
 						<true/>
 						<key>IsDisclosed</key>
-						<false/>
-						<key>KeyCode</key>
-						<integer>0</integer>
-						<key>MacroActionType</key>
-						<string>SimulateKeystroke</string>
-						<key>Modifiers</key>
-						<integer>256</integer>
-						<key>ReleaseAll</key>
-						<false/>
-					</dict>
-					<dict>
-						<key>IsActive</key>
 						<true/>
-						<key>IsDisclosed</key>
-						<false/>
 						<key>MacroActionType</key>
-						<string>Pause</string>
-						<key>Time</key>
-						<string>1</string>
+						<string>IfThenElse</string>
+						<key>ThenActions</key>
+						<array>
+							<dict>
+								<key>CaseEntries</key>
+								<array>
+									<dict>
+										<key>Actions</key>
+										<array>
+											<dict>
+												<key>IsActive</key>
+												<true/>
+												<key>IsDisclosed</key>
+												<true/>
+												<key>MacroActionType</key>
+												<string>SetVariableToText</string>
+												<key>Text</key>
+												<string>EA_fastmail_%ICUDateTime%yyyy-mm-dd-hh-mm-ss%.mail</string>
+												<key>Variable</key>
+												<string>EDIT_ANYWHERE_FILE</string>
+											</dict>
+										</array>
+										<key>ConditionType</key>
+										<string>Contains</string>
+										<key>TestValue</key>
+										<string>fastmail</string>
+									</dict>
+									<dict>
+										<key>Actions</key>
+										<array>
+											<dict>
+												<key>IsActive</key>
+												<true/>
+												<key>IsDisclosed</key>
+												<true/>
+												<key>MacroActionType</key>
+												<string>SetVariableToText</string>
+												<key>Text</key>
+												<string>EA_ipynb_%ICUDateTime%yyyy-mm-dd-hh-mm-ss%.py</string>
+												<key>Variable</key>
+												<string>EDIT_ANYWHERE_FILE</string>
+											</dict>
+										</array>
+										<key>ConditionType</key>
+										<string>Contains</string>
+										<key>TestValue</key>
+										<string>ipynb</string>
+									</dict>
+								</array>
+								<key>IsActive</key>
+								<true/>
+								<key>IsDisclosed</key>
+								<true/>
+								<key>MacroActionType</key>
+								<string>Switch</string>
+								<key>Source</key>
+								<string>Variable</string>
+								<key>Variable</key>
+								<string>TAB_NAME</string>
+							</dict>
+						</array>
 						<key>TimeOutAbortsMacro</key>
 						<true/>
+					</dict>
+					<dict>
+						<key>ActionName</key>
+						<string>Type the ⌘A Keystroke (This should trigger 'Select All Text')</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<false/>
+						<key>KeyCode</key>
+						<integer>0</integer>
+						<key>MacroActionType</key>
+						<string>SimulateKeystroke</string>
+						<key>Modifiers</key>
+						<integer>256</integer>
+						<key>ReleaseAll</key>
+						<false/>
 					</dict>
 					<dict>
 						<key>IsActive</key>
@@ -130,7 +252,7 @@ Do not change the variable name (EDIT_ANYWHERE_FILE) just change the part in the
 						<key>Paste</key>
 						<false/>
 						<key>Text</key>
-						<string>(Waiting for EditAnywhere)</string>
+						<string>[EA]</string>
 					</dict>
 					<dict>
 						<key>ActionName</key>
@@ -147,18 +269,6 @@ Do not change the variable name (EDIT_ANYWHERE_FILE) just change the part in the
 						<integer>256</integer>
 						<key>ReleaseAll</key>
 						<false/>
-					</dict>
-					<dict>
-						<key>IsActive</key>
-						<true/>
-						<key>IsDisclosed</key>
-						<false/>
-						<key>MacroActionType</key>
-						<string>Pause</string>
-						<key>Time</key>
-						<string>.5</string>
-						<key>TimeOutAbortsMacro</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>ActionName</key>
@@ -187,7 +297,7 @@ Do not change the variable name (EDIT_ANYWHERE_FILE) just change the part in the
 	## 	APP='TextWrangler'
 	## 	APP='MultiMarkdown Composer'
 	##
-APP='BBEdit'
+APP='MacVim'
 
 	## OS X no longer has a good way to ensure that GUI apps like
 	## Keyboard Maestro have access to your $PATH so I often just create
@@ -486,18 +596,8 @@ pbcopy &lt; "$FILE"
 	## I don't want to leave it there when it has already been used,
 	##	and I don't want to delete it in case something went wrong
 	## So I'm going to move it to the trash instead
-	## AND I'm going to rename the file with the current time stamp so if I
-	## happen to have several of these and need to recover one,
-	## I can do that, as long as I haven't emptied my trash
 
-		## This will be 'edit_anywhere' without the path or extension
-		## unless you changed $FILE
-	SHORT="$FILE:t:r"
-
-		## This will be 'txt' unless you changed $FILE
-	EXT="$FILE:e"
-
-/bin/mv -n "$FILE" "$HOME/.Trash/$SHORT.`timestamp`.$EXT"
+/bin/mv -n "$FILE" "$HOME/.Trash/"
 
 exit 0
 #EOF
@@ -568,6 +668,20 @@ exit 0
 								<true/>
 								<key>IsDisclosed</key>
 								<true/>
+								<key>KeyCode</key>
+								<integer>0</integer>
+								<key>MacroActionType</key>
+								<string>SimulateKeystroke</string>
+								<key>Modifiers</key>
+								<integer>256</integer>
+								<key>ReleaseAll</key>
+								<false/>
+							</dict>
+							<dict>
+								<key>IsActive</key>
+								<true/>
+								<key>IsDisclosed</key>
+								<true/>
 								<key>MacroActionType</key>
 								<string>SelectMenuItem</string>
 								<key>Menu</key>
@@ -588,7 +702,7 @@ exit 0
 				<key>IsActive</key>
 				<true/>
 				<key>ModificationDate</key>
-				<real>460507471.884552</real>
+				<real>461632987.04188102</real>
 				<key>Name</key>
 				<string>Edit Anywhere</string>
 				<key>Triggers</key>
@@ -597,11 +711,11 @@ exit 0
 						<key>FireType</key>
 						<string>Pressed</string>
 						<key>KeyCode</key>
-						<integer>11</integer>
+						<integer>34</integer>
 						<key>MacroTriggerType</key>
 						<string>HotKey</string>
 						<key>Modifiers</key>
-						<integer>6912</integer>
+						<integer>256</integer>
 					</dict>
 				</array>
 				<key>UID</key>
@@ -611,9 +725,9 @@ exit 0
 		<key>Name</key>
 		<string>Global Macro Group</string>
 		<key>ToggleMacroUID</key>
-		<string>4948A9C1-5CD3-4AA1-A25D-9D29C5471ED8</string>
+		<string>DD3405B6-BB4A-48E8-BE11-314BB49C9CBA</string>
 		<key>UID</key>
-		<string>DA8512F7-F323-46B1-8319-752E0495CFD0</string>
+		<string>B92ED5D4-2738-4F1C-8001-98A709BDED9F</string>
 	</dict>
 </array>
 </plist>
