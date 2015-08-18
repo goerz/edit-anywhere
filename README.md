@@ -3,6 +3,8 @@ edit-anywhere
 
 **Summary:** A quick-and-dirty attempt at implementing [QuickCursor][1] using [BBEdit][2] and [Keyboard Maestro][3].
 
+**Note:** This is my personal adaption of the original script at <https://github.com/tjluoma/edit-anywhere>
+
 **For those who aren't familiar with QuickCursor:**
 QuickCursor did one thing really well: anywhere you could edit text, it would send that text to [your favorite text editor][2] and then when you closed that file, it would send the text back to the original application.
 
@@ -26,39 +28,27 @@ Like so:
 	*	if yes, then EA assumes that you have some text selected, and that is the text you want to edit.
 	*	if no, EA will do 'Select All' (using either the menu item or ⌘ + A depending on which is available)
 	
-3.	EA will then 'cut' the text from step 2 and save it to a file `~/edit_anywhere.txt`. That file is in your home directory, which means that:
+3.	EA will then 'cut' the text from step 2 and save it to a temporary file, e.g. `~/EA_Safari_2015-25-18-07-25-11.txt`. The filename includes a time stamp, and its name is based on the current application and possibly the current tab name. The file is in your home directory, which means that:
 	*	you can save it as often as you like
 	*	if you reboot your computer (or, heaven forbid, it crashes) the file will still be there
 	*	it is secure, at least in as much as no one else should be able to read it unless they already have access to your account.
 	
-4.	EA will then open the file in your editor of choice
-	*	If you use BBEdit and have the `bbedit` command-line tool installed, the script will use that. The file will open in BBEdit and the script will pause until you close the file in BBEdit. You do not have to quit the BBEdit app, just close the window or ‘tab’ where you had been editing the document.  (Note: if you purchased BBEdit from the Mac App Store you will have to [download and install the command line tools from BareBones.com][6].)
-
-	*	If you use another editor, it will be opened using `open -a YourAppHere -n -W` which means that a new instance of the app will be opened (even if it is already running) and the script will wait until that _instance_ of the app has quit (not just the window closed, but the app quit).
+4.	EA will then open the file in your editor of choice, MacVim by default. If you use another editor, it will be opened using `open -a YourAppHere -n -W` which means that a new instance of the app will be opened (even if it is already running) and the script will wait until that _instance_ of the app has quit (not just the window closed, but the app quit).
 
 
-5. EA will then paste the contents of `~/edit_anywhere.txt` into the original app.
+5. EA will then paste the contents of the temporary file into the original app.
 
-8. EA will then rename the `~/edit_anywhere.txt` file to something like `edit_anywhere.2015-08-05--16.30.15.txt` (representing the current date and 24h-time) and move it to the trash (~/.Trash/). This is intended as a safety net in case you need to recover text from the file for some reason. (For example, if pasting the contents of the file into the original app did not work for some reason.)
+8. EA will then move it to the trash (~/.Trash/). This is intended as a safety net in case you need to recover text from the file for some reason. (For example, if pasting the contents of the file into the original app did not work for some reason.)
 
 
 ### There are a few provisos, a couple of *quid pro quos*.
 
 * This will only work in ‘regular’ applications. Specifically, if will ***not*** work in applications which only exist in the menu bar. This limitation was present in QuickCursor too. When in doubt, I recommend testing the “round trip” in your app of choice to make sure that it works as expected.
 
-### Future Feature Ideas
 
-* Now the the script knows which app that the content came from, it would be fairly easy to define different text editors depending on which app sent the text. For example, when you invoke this macro from Scrivener, it could open MultiMarkdown Composer or Byword instead of your regular app. 
+### “How do I install this?”
 
-### FAQ: “How do I use a different app besides BBEdit?”
-
-The macro assumes you want to use BBEdit unless you change the `APP=` variable in the script section of the macro, as shown here:
-
-![](images/define-your-editor.jpg)
-
-### FAQ: “How do I install this?”
-
-1.	[Download the macro](https://github.com/tjluoma/edit-anywhere/raw/master/Edit-Anywhere.kmmacros) (right click on that link and use save as, or equivalent.)
+1.	[Download the macro](https://github.com/goerz/edit-anywhere/raw/master/Edit-Anywhere.kmmacros) (right click on that link and use save as, or equivalent.)
 
 2.	Make sure the file extension is `.kmmacros` (Be sure that your browser did  ***not*** rename it to something like `.kmmacros.txt`)
 
