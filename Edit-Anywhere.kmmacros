@@ -343,6 +343,7 @@ NAME="[Edit Anywhere via Keyboard Maestro]"
 	## Change this if necessary
 	## Used for pbcopy and pbpaste
 LANG=en_US.UTF-8
+LC_ALL=en_US.UTF-8
 
 zmodload zsh/datetime ## needed for strftime
 
@@ -438,12 +439,8 @@ PARENT_DIR="$FILE:h"
 
 [[ ! -d "$PARENT_DIR" ]] &amp;&amp; mkdir -p "$PARENT_DIR" &amp;&amp; msg "Created $PARENT_DIR for $FILE"
 
-if [[ -e "$FILE" ]]
-then
-	pbpaste &gt;&gt; "$FILE"
-else
-	pbpaste &gt; "$FILE"
-fi
+
+LC_ALL=en_US.UTF-8 pbpaste &gt; "$FILE"
 
 EXIT="$?"
 
@@ -589,7 +586,7 @@ open -a "$KMVAR_EditAnywhereApp"
 
 
 	## copy the file back to the pasteboard
-pbcopy &lt; "$FILE"
+LC_ALL=en_US.UTF-8 pbcopy &lt; "$FILE"
 
 	## OK, now we are done with the FILE so we have to either leave it there,
 	## 	delete it, or move it to the trash.
@@ -702,7 +699,7 @@ exit 0
 				<key>IsActive</key>
 				<true/>
 				<key>ModificationDate</key>
-				<real>461632987.04188102</real>
+				<real>461955434.75262499</real>
 				<key>Name</key>
 				<string>Edit Anywhere</string>
 				<key>Triggers</key>
@@ -715,7 +712,7 @@ exit 0
 						<key>MacroTriggerType</key>
 						<string>HotKey</string>
 						<key>Modifiers</key>
-						<integer>256</integer>
+						<integer>2304</integer>
 					</dict>
 				</array>
 				<key>UID</key>
