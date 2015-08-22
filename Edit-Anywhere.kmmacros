@@ -352,79 +352,8 @@ function timestamp { strftime "%Y-%m-%d--%H.%M.%S" "$EPOCHSECONDS" }
 	# This gives us a unique reference point for when the script was launched
 TIME=`strftime "%Y-%m-%d--%H.%M.%S" "$EPOCHSECONDS"`
 
-
-if (( $+commands[growlnotify] ))
-then
-		## We found the growlnotify tool installed
-	GROWLNOTIFY_FOUND='yes'
-
-		## We only check to see if Growl.app is running IFF we have
-		## found growlnotify because otherwise there's no point caring.
-
-	if [ "`pgrep -x Growl`" = "" ]
-	then
-			## Growl is NOT running
-		GROWL_RUNNING='no'
-	else
-			## Growl IS running
-		GROWL_RUNNING='yes'
-	fi
-
-else
-		## We did NOT find the growlnotify tool installed
-	GROWLNOTIFY_FOUND='no'
-
-		## We just set this to 'no' because it doesn't matter, if the
-		## growlnotify tool isn't found too.
-	GROWL_RUNNING='no'
-fi
-
-
-if [ "$GROWL_RUNNING" = "yes" -a "$GROWLNOTIFY_FOUND" = "yes" ]
-then
-	## If growlnotify is installed AND Growl.app is running, use Growl for notifications
-
-	function msg
-	{
-		growlnotify \
-		--appIcon "$APP" \
-		--identifier "$NAME" \
-		--message "$@" \
-		--title "$NAME"
-
-	} ## end of msg/growl
-
-
-elif (( $+commands[terminal-notifier] ))
-then
-	## OTHERWISE, use terminal-notifier for notifications, if it is installed.
-
-	function msg
-	{
-		if [[ -e "/Applications/$APP.app/Contents/Info.plist" ]]
-		then
-				## If there is an app plist where we'd expect it to be, try to get the Bundle identifier from it
-
-			TN_BUNDLE_ID=`defaults read /Applications/${APP}.app/Contents/Info CFBundleIdentifier`
-		fi
-
-				## If we were not able to get a bundle ID, use Keyboard Maestro's
-		[[ "$TN_BUNDLE_ID" == "" ]] &amp;&amp; TN_BUNDLE_ID='com.stairways.keyboardmaestro.editor'
-
-		terminal-notifier \
-			-title "$NAME" \
-			-subtitle "`timestamp`" \
-			-group "$NAME" \
-			-sender "$TN_BUNDLE_ID" \
-			-activate "$TN_BUNDLE_ID" \
-			-message "$@"
-	} ## end of msg/terminal-notifier
-
-else
-
-	function msg { echo "$NAME: $@" | tee -a "${TMPDIR-/tmp/}${NAME}.$TIME.log" }
-
-fi
+#function msg { echo "$NAME: $@" | tee -a "${TMPDIR-/tmp/}${NAME}.$TIME.log" }
+function msg { }
 
 
 ###########################################################################################
@@ -477,49 +406,11 @@ else
 
 fi
 
+## We will try to open the file in the requested app
+## but if the open command fails for some reason,
+## we will open TextEdit
 
-if (( $+commands[bbedit] ))
-then
-		## We found the command line bbedit tool
-	CL_BBEDIT='yes'
-else
-		## We did NOT find the command line bbedit tool
-	CL_BBEDIT='no'
-fi
-
-
-
-if [[ "$CL_BBEDIT" = "yes" &amp;&amp; "$APP:l" == "bbedit" ]]
-then
-		## IFF the user wants to use BBEdit and they have the bbedit
-		## command line tool installed, then we will use the bbedit tool
-
-		## if BBEdit is not running, launch it
-	pgrep -xq BBEdit || (open -a BBEdit &amp;&amp; sleep 3)
-
-		## We will try to open the app with the bbedit command,
-		## but if it fails we will open TextEdit
-	bbedit \
-		--language 'Markdown' \
-		--create-unix \
-		--new-window \
-		--resume \
-		--wait \
-		-- "$FILE" \
-	 || open -n -e -W "$FILE"
-
-else
-		## if we get here, either the app is NOT BBEdit
-		## or they do not have the `bbedit` tool installed
-
-		## We will try to open the file in the requested app
-		## but if the open command fails for some reason,
-		## we will open TextEdit
-
-	open -a "$APP" -n -W "$FILE" || open -a -n -e -W "$FILE"
-
-fi # if app is BBEdit
-
+open -a "$APP" -n -W "$FILE" || open -a -n -e -W "$FILE"
 
 EXIT="$?"
 
@@ -536,7 +427,7 @@ then
 	exit 1
 fi
 
-## If we get here, `open` or `bbedit` exited successfully
+## If we get here, `open` exited successfully
 
 
 	## Make sure that the app we want to paste into is actually running
@@ -699,7 +590,7 @@ exit 0
 				<key>IsActive</key>
 				<true/>
 				<key>ModificationDate</key>
-				<real>461955434.75262499</real>
+				<real>461955977.13904899</real>
 				<key>Name</key>
 				<string>Edit Anywhere</string>
 				<key>Triggers</key>
