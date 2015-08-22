@@ -93,11 +93,32 @@ Do not change the variable name (EDIT_ANYWHERE_FILE) just change the part in the
 								<key>TestValue</key>
 								<string>Chrome</string>
 							</dict>
+							<dict>
+								<key>Actions</key>
+								<array>
+									<dict>
+										<key>IsActive</key>
+										<true/>
+										<key>IsDisclosed</key>
+										<false/>
+										<key>MacroActionType</key>
+										<string>SetVariableToText</string>
+										<key>Text</key>
+										<string></string>
+										<key>Variable</key>
+										<string>TAB_NAME</string>
+									</dict>
+								</array>
+								<key>ConditionType</key>
+								<string>Otherwise</string>
+								<key>TestValue</key>
+								<string></string>
+							</dict>
 						</array>
 						<key>IsActive</key>
 						<true/>
 						<key>IsDisclosed</key>
-						<true/>
+						<false/>
 						<key>MacroActionType</key>
 						<string>Switch</string>
 						<key>Source</key>
@@ -106,109 +127,82 @@ Do not change the variable name (EDIT_ANYWHERE_FILE) just change the part in the
 						<string>EditAnywhereApp</string>
 					</dict>
 					<dict>
-						<key>ActionName</key>
-						<string>Set EDIT_ANYWHERE_FILE based on running app or tab name</string>
-						<key>Conditions</key>
-						<dict>
-							<key>ConditionList</key>
-							<array>
-								<dict>
-									<key>ConditionType</key>
-									<string>Variable</string>
-									<key>Variable</key>
-									<string>TAB_NAME</string>
-									<key>VariableConditionType</key>
-									<string>Exists</string>
-									<key>VariableValue</key>
-									<string>value</string>
-								</dict>
-							</array>
-							<key>ConditionListMatch</key>
-							<string>All</string>
-						</dict>
-						<key>ElseActions</key>
+						<key>CaseEntries</key>
 						<array>
 							<dict>
-								<key>IsActive</key>
-								<true/>
-								<key>IsDisclosed</key>
-								<false/>
-								<key>MacroActionType</key>
-								<string>SetVariableToText</string>
-								<key>Text</key>
-								<string>EA_%Variable%EditAnywhereApp%_%ICUDateTime%yyyy-mm-dd-hh-mm-ss%.txt</string>
-								<key>Variable</key>
-								<string>EDIT_ANYWHERE_FILE</string>
+								<key>Actions</key>
+								<array>
+									<dict>
+										<key>IsActive</key>
+										<true/>
+										<key>IsDisclosed</key>
+										<false/>
+										<key>MacroActionType</key>
+										<string>SetVariableToText</string>
+										<key>Text</key>
+										<string>EA_fastmail_%ICUDateTime%yyyy-mm-dd-hh-mm-ss%.mail</string>
+										<key>Variable</key>
+										<string>EDIT_ANYWHERE_FILE</string>
+									</dict>
+								</array>
+								<key>ConditionType</key>
+								<string>Contains</string>
+								<key>TestValue</key>
+								<string>fastmail</string>
+							</dict>
+							<dict>
+								<key>Actions</key>
+								<array>
+									<dict>
+										<key>IsActive</key>
+										<true/>
+										<key>IsDisclosed</key>
+										<true/>
+										<key>MacroActionType</key>
+										<string>SetVariableToText</string>
+										<key>Text</key>
+										<string>EA_ipynb_%ICUDateTime%yyyy-mm-dd-hh-mm-ss%.py</string>
+										<key>Variable</key>
+										<string>EDIT_ANYWHERE_FILE</string>
+									</dict>
+								</array>
+								<key>ConditionType</key>
+								<string>Contains</string>
+								<key>TestValue</key>
+								<string>ipynb</string>
+							</dict>
+							<dict>
+								<key>Actions</key>
+								<array>
+									<dict>
+										<key>IsActive</key>
+										<true/>
+										<key>IsDisclosed</key>
+										<true/>
+										<key>MacroActionType</key>
+										<string>SetVariableToText</string>
+										<key>Text</key>
+										<string>EA_%Variable%EditAnywhereApp%_%ICUDateTime%yyyy-mm-dd-hh-mm-ss%.txt</string>
+										<key>Variable</key>
+										<string>EDIT_ANYWHERE_FILE</string>
+									</dict>
+								</array>
+								<key>ConditionType</key>
+								<string>Otherwise</string>
+								<key>TestValue</key>
+								<string></string>
 							</dict>
 						</array>
 						<key>IsActive</key>
 						<true/>
 						<key>IsDisclosed</key>
-						<true/>
+						<false/>
 						<key>MacroActionType</key>
-						<string>IfThenElse</string>
-						<key>ThenActions</key>
-						<array>
-							<dict>
-								<key>CaseEntries</key>
-								<array>
-									<dict>
-										<key>Actions</key>
-										<array>
-											<dict>
-												<key>IsActive</key>
-												<true/>
-												<key>IsDisclosed</key>
-												<true/>
-												<key>MacroActionType</key>
-												<string>SetVariableToText</string>
-												<key>Text</key>
-												<string>EA_fastmail_%ICUDateTime%yyyy-mm-dd-hh-mm-ss%.mail</string>
-												<key>Variable</key>
-												<string>EDIT_ANYWHERE_FILE</string>
-											</dict>
-										</array>
-										<key>ConditionType</key>
-										<string>Contains</string>
-										<key>TestValue</key>
-										<string>fastmail</string>
-									</dict>
-									<dict>
-										<key>Actions</key>
-										<array>
-											<dict>
-												<key>IsActive</key>
-												<true/>
-												<key>IsDisclosed</key>
-												<true/>
-												<key>MacroActionType</key>
-												<string>SetVariableToText</string>
-												<key>Text</key>
-												<string>EA_ipynb_%ICUDateTime%yyyy-mm-dd-hh-mm-ss%.py</string>
-												<key>Variable</key>
-												<string>EDIT_ANYWHERE_FILE</string>
-											</dict>
-										</array>
-										<key>ConditionType</key>
-										<string>Contains</string>
-										<key>TestValue</key>
-										<string>ipynb</string>
-									</dict>
-								</array>
-								<key>IsActive</key>
-								<true/>
-								<key>IsDisclosed</key>
-								<true/>
-								<key>MacroActionType</key>
-								<string>Switch</string>
-								<key>Source</key>
-								<string>Variable</string>
-								<key>Variable</key>
-								<string>TAB_NAME</string>
-							</dict>
-						</array>
-						<key>TimeOutAbortsMacro</key>
-						<true/>
+						<string>Switch</string>
+						<key>Source</key>
+						<string>Variable</string>
+						<key>Variable</key>
+						<string>TAB_NAME</string>
 					</dict>
 					<dict>
 						<key>ActionName</key>
@@ -280,7 +274,7 @@ Do not change the variable name (EDIT_ANYWHERE_FILE) just change the part in the
 						<key>IsActive</key>
 						<true/>
 						<key>IsDisclosed</key>
-						<true/>
+						<false/>
 						<key>MacroActionType</key>
 						<string>ExecuteShellScript</string>
 						<key>Path</key>
@@ -590,7 +584,7 @@ exit 0
 				<key>IsActive</key>
 				<true/>
 				<key>ModificationDate</key>
-				<real>461955977.13904899</real>
+				<real>461964208.63788199</real>
 				<key>Name</key>
 				<string>Edit Anywhere</string>
 				<key>Triggers</key>

@@ -3,7 +3,7 @@ edit-anywhere
 
 **Summary:** A quick-and-dirty attempt at implementing [QuickCursor][1] using [BBEdit][2] and [Keyboard Maestro][3].
 
-**Note:** This is my personal adaption of the original script at <https://github.com/tjluoma/edit-anywhere>
+**Note:** This is my personal adaption of the original script at <https://github.com/tjluoma/edit-anywhere>. The main modifications are that MacVim is used as the default editor, and the name of the temporary file  is based on the app from which the macros is called, and on the currently open tab if that app is Safari or Chrome. The file also includes a timestamp.
 
 **For those who aren't familiar with QuickCursor:**
 QuickCursor did one thing really well: anywhere you could edit text, it would send that text to [your favorite text editor][2] and then when you closed that file, it would send the text back to the original application.
